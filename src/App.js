@@ -58,9 +58,13 @@ const App = () => {
         <Route path="/authors/">
           <AuthorList authors={authors} />
         </Route>
+        <Route path="/books/:color">
+          <BookList books={books} />
+        </Route>
         <Route path="/books/">
           <BookList books={books} />
         </Route>
+
       </Switch>
     );
   };

@@ -1,4 +1,6 @@
 import React, { useState } from "react";
+import { useParams } from "react-router-dom";
+
 
 // Components
 import BookCard from "./BookCard";
@@ -6,18 +8,18 @@ import SearchBar from "./SearchBar";
 
 const BookList = props => {
   const [query, setQuery] = useState("");
-  const [color, setColor] = useState("");
+  const {color} = useParams();
 
   let filteredBooks = props.books.filter(book =>
     book.title
       .toLowerCase()
       .includes(query.toLowerCase())
   );
-  filteredBooks = props.books.filter(book =>
-    book.color.includes(color)
-  );
+  if (color)
+    filteredBooks = filteredBooks.filter(book => book.color === color)
+
   const bookCards = filteredBooks.map(book => (
-    <BookCard book={book} handleFilter={setColor} />
+    <BookCard book={book} />
   ));
 
   return (
